@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="Copy Natives">
+    <output-path>$PROJECT_DIR$/out/artifacts/kadmium_sacn_dmx_jar</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/native" />
+    </root>
+  </artifact>
+</component>

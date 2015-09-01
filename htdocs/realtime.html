@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>sACN to DMX</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <script src="jquery/jquery-2.1.4.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+        <div class="container">
+            <h1>sACN to DMX</h1>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Time since last update:</p>
+                </div> 
+                <div class="col-sm-6">
+                    <span id="spnLastUpdateTime">never</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Websocket connection status:</p>
+                </div>
+                <div class="col-sm-6">
+                    <span id="spnConnectionStatus">disconnected</span>
+                </div>
+            </div>
+            
+            <div class="btn-group btn-group-lg">
+                <a href="/" class="btn btn-primary">Home</a>
+                <a href="/config" class="btn btn-primary">Config</a>
+                <a href="/realtime" class="btn btn-primary">Realtime</a>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>0</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>0</th>
+                        <td id="dmx0">000</td>
+                        <td id="dmx1">000</td>
+                        <td id="dmx2">000</td>
+                        <td id="dmx3">000</td>
+                        <td id="dmx4">000</td>
+                        <td id="dmx5">000</td>
+                        <td id="dmx6">000</td>
+                        <td id="dmx7">000</td>
+                        <td id="dmx8">000</td>
+                        <td id="dmx9">000</td>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <td id="dmx10">000</td>
+                        <td id="dmx11">000</td>
+                        <td id="dmx12">000</td>
+                        <td id="dmx13">000</td>
+                        <td id="dmx14">000</td>
+                        <td id="dmx15">000</td>
+                        <td id="dmx16">000</td>
+                        <td id="dmx17">000</td>
+                        <td id="dmx18">000</td>
+                        <td id="dmx19">000</td>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <td id="dmx20">000</td>
+                        <td id="dmx21">000</td>
+                        <td id="dmx22">000</td>
+                        <td id="dmx23">000</td>
+                        <td id="dmx24">000</td>
+                        <td id="dmx25">000</td>
+                        <td id="dmx26">000</td>
+                        <td id="dmx27">000</td>
+                        <td id="dmx28">000</td>
+                        <td id="dmx29">000</td>
+                    </tr>
+                    <tr>
+                        <th>3</th>
+                        <td id="dmx30">000</td>
+                        <td id="dmx31">000</td>
+                        <td id="dmx32">000</td>
+                        <td id="dmx33">000</td>
+                        <td id="dmx34">000</td>
+                        <td id="dmx35">000</td>
+                        <td id="dmx36">000</td>
+                        <td id="dmx37">000</td>
+                        <td id="dmx38">000</td>
+                        <td id="dmx39">000</td>
+                    </tr>
+                    <tr>
+                        <th>4</th>
+                        <td id="dmx40">000</td>
+                        <td id="dmx41">000</td>
+                        <td id="dmx42">000</td>
+                        <td id="dmx43">000</td>
+                        <td id="dmx44">000</td>
+                        <td id="dmx45">000</td>
+                        <td id="dmx46">000</td>
+                        <td id="dmx47">000</td>
+                        <td id="dmx48">000</td>
+                        <td id="dmx49">000</td>
+                    </tr>
+                    <tr>
+                        <th>5</th>
+                        <td id="dmx50">000</td>
+                        <td id="dmx51">000</td>
+                        <td id="dmx52">000</td>
+                        <td id="dmx53">000</td>
+                        <td id="dmx54">000</td>
+                        <td id="dmx55">000</td>
+                        <td id="dmx56">000</td>
+                        <td id="dmx57">000</td>
+                        <td id="dmx58">000</td>
+                        <td id="dmx59">000</td>
+                    </tr>
+                    <tr>
+                        <th>6</th>
+                        <td id="dmx60">000</td>
+                        <td id="dmx61">000</td>
+                        <td id="dmx62">000</td>
+                        <td id="dmx63">000</td>
+                        <td id="dmx64">000</td>
+                        <td id="dmx65">000</td>
+                        <td id="dmx66">000</td>
+                        <td id="dmx67">000</td>
+                        <td id="dmx68">000</td>
+                        <td id="dmx69">000</td>
+                    </tr>
+                    <tr>
+                        <th>7</th>
+                        <td id="dmx70">000</td>
+                        <td id="dmx71">000</td>
+                        <td id="dmx72">000</td>
+                        <td id="dmx73">000</td>
+                        <td id="dmx74">000</td>
+                        <td id="dmx75">000</td>
+                        <td id="dmx76">000</td>
+                        <td id="dmx77">000</td>
+                        <td id="dmx78">000</td>
+                        <td id="dmx79">000</td>
+                    </tr>
+                    <tr>
+                        <th>8</th>
+                        <td id="dmx80">000</td>
+                        <td id="dmx81">000</td>
+                        <td id="dmx82">000</td>
+                        <td id="dmx83">000</td>
+                        <td id="dmx84">000</td>
+                        <td id="dmx85">000</td>
+                        <td id="dmx86">000</td>
+                        <td id="dmx87">000</td>
+                        <td id="dmx88">000</td>
+                        <td id="dmx89">000</td>
+                    </tr>
+                    <tr>
+                        <th>9</th>
+                        <td id="dmx90">000</td>
+                        <td id="dmx91">000</td>
+                        <td id="dmx92">000</td>
+                        <td id="dmx93">000</td>
+                        <td id="dmx94">000</td>
+                        <td id="dmx95">000</td>
+                        <td id="dmx96">000</td>
+                        <td id="dmx97">000</td>
+                        <td id="dmx98">000</td>
+                        <td id="dmx99">000</td>
+                    </tr>
+                    <tr>
+                        <th>10</th>
+                        <td id="dmx100">000</td>
+                        <td id="dmx101">000</td>
+                        <td id="dmx102">000</td>
+                        <td id="dmx103">000</td>
+                        <td id="dmx104">000</td>
+                        <td id="dmx105">000</td>
+                        <td id="dmx106">000</td>
+                        <td id="dmx107">000</td>
+                        <td id="dmx108">000</td>
+                        <td id="dmx109">000</td>
+                    </tr>
+                    <tr>
+                        <th>11</th>
+                        <td id="dmx110">000</td>
+                        <td id="dmx111">000</td>
+                        <td id="dmx112">000</td>
+                        <td id="dmx113">000</td>
+                        <td id="dmx114">000</td>
+                        <td id="dmx115">000</td>
+                        <td id="dmx116">000</td>
+                        <td id="dmx117">000</td>
+                        <td id="dmx118">000</td>
+                        <td id="dmx119">000</td>
+                    </tr>
+                    <tr>
+                        <th>12</th>
+                        <td id="dmx120">000</td>
+                        <td id="dmx121">000</td>
+                        <td id="dmx122">000</td>
+                        <td id="dmx123">000</td>
+                        <td id="dmx124">000</td>
+                        <td id="dmx125">000</td>
+                        <td id="dmx126">000</td>
+                        <td id="dmx127">000</td>
+                        <td id="dmx128">000</td>
+                        <td id="dmx129">000</td>
+                    </tr>
+                    <tr>
+                        <th>13</th>
+                        <td id="dmx130">000</td>
+                        <td id="dmx131">000</td>
+                        <td id="dmx132">000</td>
+                        <td id="dmx133">000</td>
+                        <td id="dmx134">000</td>
+                        <td id="dmx135">000</td>
+                        <td id="dmx136">000</td>
+                        <td id="dmx137">000</td>
+                        <td id="dmx138">000</td>
+                        <td id="dmx139">000</td>
+                    </tr>
+                    <tr>
+                        <th>14</th>
+                        <td id="dmx140">000</td>
+                        <td id="dmx141">000</td>
+                        <td id="dmx142">000</td>
+                        <td id="dmx143">000</td>
+                        <td id="dmx144">000</td>
+                        <td id="dmx145">000</td>
+                        <td id="dmx146">000</td>
+                        <td id="dmx147">000</td>
+                        <td id="dmx148">000</td>
+                        <td id="dmx149">000</td>
+                    </tr>
+                    <tr>
+                        <th>15</th>
+                        <td id="dmx150">000</td>
+                        <td id="dmx151">000</td>
+                        <td id="dmx152">000</td>
+                        <td id="dmx153">000</td>
+                        <td id="dmx154">000</td>
+                        <td id="dmx155">000</td>
+                        <td id="dmx156">000</td>
+                        <td id="dmx157">000</td>
+                        <td id="dmx158">000</td>
+                        <td id="dmx159">000</td>
+                    </tr>
+                    <tr>
+                        <th>16</th>
+                        <td id="dmx160">000</td>
+                        <td id="dmx161">000</td>
+                        <td id="dmx162">000</td>
+                        <td id="dmx163">000</td>
+                        <td id="dmx164">000</td>
+                        <td id="dmx165">000</td>
+                        <td id="dmx166">000</td>
+                        <td id="dmx167">000</td>
+                        <td id="dmx168">000</td>
+                        <td id="dmx169">000</td>
+                    </tr>
+                    <tr>
+                        <th>17</th>
+                        <td id="dmx170">000</td>
+                        <td id="dmx171">000</td>
+                        <td id="dmx172">000</td>
+                        <td id="dmx173">000</td>
+                        <td id="dmx174">000</td>
+                        <td id="dmx175">000</td>
+                        <td id="dmx176">000</td>
+                        <td id="dmx177">000</td>
+                        <td id="dmx178">000</td>
+                        <td id="dmx179">000</td>
+                    </tr>
+                    <tr>
+                        <th>18</th>
+                        <td id="dmx180">000</td>
+                        <td id="dmx181">000</td>
+                        <td id="dmx182">000</td>
+                        <td id="dmx183">000</td>
+                        <td id="dmx184">000</td>
+                        <td id="dmx185">000</td>
+                        <td id="dmx186">000</td>
+                        <td id="dmx187">000</td>
+                        <td id="dmx188">000</td>
+                        <td id="dmx189">000</td>
+                    </tr>
+                    <tr>
+                        <th>19</th>
+                        <td id="dmx190">000</td>
+                        <td id="dmx191">000</td>
+                        <td id="dmx192">000</td>
+                        <td id="dmx193">000</td>
+                        <td id="dmx194">000</td>
+                        <td id="dmx195">000</td>
+                        <td id="dmx196">000</td>
+                        <td id="dmx197">000</td>
+                        <td id="dmx198">000</td>
+                        <td id="dmx199">000</td>
+                    </tr>
+                    <tr>
+                        <th>20</th>
+                        <td id="dmx200">000</td>
+                        <td id="dmx201">000</td>
+                        <td id="dmx202">000</td>
+                        <td id="dmx203">000</td>
+                        <td id="dmx204">000</td>
+                        <td id="dmx205">000</td>
+                        <td id="dmx206">000</td>
+                        <td id="dmx207">000</td>
+                        <td id="dmx208">000</td>
+                        <td id="dmx209">000</td>
+                    </tr>
+                    <tr>
+                        <th>21</th>
+                        <td id="dmx210">000</td>
+                        <td id="dmx211">000</td>
+                        <td id="dmx212">000</td>
+                        <td id="dmx213">000</td>
+                        <td id="dmx214">000</td>
+                        <td id="dmx215">000</td>
+                        <td id="dmx216">000</td>
+                        <td id="dmx217">000</td>
+                        <td id="dmx218">000</td>
+                        <td id="dmx219">000</td>
+                    </tr>
+                    <tr>
+                        <th>22</th>
+                        <td id="dmx220">000</td>
+                        <td id="dmx221">000</td>
+                        <td id="dmx222">000</td>
+                        <td id="dmx223">000</td>
+                        <td id="dmx224">000</td>
+                        <td id="dmx225">000</td>
+                        <td id="dmx226">000</td>
+                        <td id="dmx227">000</td>
+                        <td id="dmx228">000</td>
+                        <td id="dmx229">000</td>
+                    </tr>
+                    <tr>
+                        <th>23</th>
+                        <td id="dmx230">000</td>
+                        <td id="dmx231">000</td>
+                        <td id="dmx232">000</td>
+                        <td id="dmx233">000</td>
+                        <td id="dmx234">000</td>
+                        <td id="dmx235">000</td>
+                        <td id="dmx236">000</td>
+                        <td id="dmx237">000</td>
+                        <td id="dmx238">000</td>
+                        <td id="dmx239">000</td>
+                    </tr>
+                    <tr>
+                        <th>24</th>
+                        <td id="dmx240">000</td>
+                        <td id="dmx241">000</td>
+                        <td id="dmx242">000</td>
+                        <td id="dmx243">000</td>
+                        <td id="dmx244">000</td>
+                        <td id="dmx245">000</td>
+                        <td id="dmx246">000</td>
+                        <td id="dmx247">000</td>
+                        <td id="dmx248">000</td>
+                        <td id="dmx249">000</td>
+                    </tr>
+                    <tr>
+                        <th>25</th>
+                        <td id="dmx250">000</td>
+                        <td id="dmx251">000</td>
+                        <td id="dmx252">000</td>
+                        <td id="dmx253">000</td>
+                        <td id="dmx254">000</td>
+                        <td id="dmx255">000</td>
+                        <td id="dmx256">000</td>
+                        <td id="dmx257">000</td>
+                        <td id="dmx258">000</td>
+                        <td id="dmx259">000</td>
+                    </tr>
+                    <tr>
+                        <th>26</th>
+                        <td id="dmx260">000</td>
+                        <td id="dmx261">000</td>
+                        <td id="dmx262">000</td>
+                        <td id="dmx263">000</td>
+                        <td id="dmx264">000</td>
+                        <td id="dmx265">000</td>
+                        <td id="dmx266">000</td>
+                        <td id="dmx267">000</td>
+                        <td id="dmx268">000</td>
+                        <td id="dmx269">000</td>
+                    </tr>
+                    <tr>
+                        <th>27</th>
+                        <td id="dmx270">000</td>
+                        <td id="dmx271">000</td>
+                        <td id="dmx272">000</td>
+                        <td id="dmx273">000</td>
+                        <td id="dmx274">000</td>
+                        <td id="dmx275">000</td>
+                        <td id="dmx276">000</td>
+                        <td id="dmx277">000</td>
+                        <td id="dmx278">000</td>
+                        <td id="dmx279">000</td>
+                    </tr>
+                    <tr>
+                        <th>28</th>
+                        <td id="dmx280">000</td>
+                        <td id="dmx281">000</td>
+                        <td id="dmx282">000</td>
+                        <td id="dmx283">000</td>
+                        <td id="dmx284">000</td>
+                        <td id="dmx285">000</td>
+                        <td id="dmx286">000</td>
+                        <td id="dmx287">000</td>
+                        <td id="dmx288">000</td>
+                        <td id="dmx289">000</td>
+                    </tr>
+                    <tr>
+                        <th>29</th>
+                        <td id="dmx290">000</td>
+                        <td id="dmx291">000</td>
+                        <td id="dmx292">000</td>
+                        <td id="dmx293">000</td>
+                        <td id="dmx294">000</td>
+                        <td id="dmx295">000</td>
+                        <td id="dmx296">000</td>
+                        <td id="dmx297">000</td>
+                        <td id="dmx298">000</td>
+                        <td id="dmx299">000</td>
+                    </tr>
+                    <tr>
+                        <th>30</th>
+                        <td id="dmx300">000</td>
+                        <td id="dmx301">000</td>
+                        <td id="dmx302">000</td>
+                        <td id="dmx303">000</td>
+                        <td id="dmx304">000</td>
+                        <td id="dmx305">000</td>
+                        <td id="dmx306">000</td>
+                        <td id="dmx307">000</td>
+                        <td id="dmx308">000</td>
+                        <td id="dmx309">000</td>
+                    </tr>
+                    <tr>
+                        <th>31</th>
+                        <td id="dmx310">000</td>
+                        <td id="dmx311">000</td>
+                        <td id="dmx312">000</td>
+                        <td id="dmx313">000</td>
+                        <td id="dmx314">000</td>
+                        <td id="dmx315">000</td>
+                        <td id="dmx316">000</td>
+                        <td id="dmx317">000</td>
+                        <td id="dmx318">000</td>
+                        <td id="dmx319">000</td>
+                    </tr>
+                    <tr>
+                        <th>32</th>
+                        <td id="dmx320">000</td>
+                        <td id="dmx321">000</td>
+                        <td id="dmx322">000</td>
+                        <td id="dmx323">000</td>
+                        <td id="dmx324">000</td>
+                        <td id="dmx325">000</td>
+                        <td id="dmx326">000</td>
+                        <td id="dmx327">000</td>
+                        <td id="dmx328">000</td>
+                        <td id="dmx329">000</td>
+                    </tr>
+                    <tr>
+                        <th>33</th>
+                        <td id="dmx330">000</td>
+                        <td id="dmx331">000</td>
+                        <td id="dmx332">000</td>
+                        <td id="dmx333">000</td>
+                        <td id="dmx334">000</td>
+                        <td id="dmx335">000</td>
+                        <td id="dmx336">000</td>
+                        <td id="dmx337">000</td>
+                        <td id="dmx338">000</td>
+                        <td id="dmx339">000</td>
+                    </tr>
+                    <tr>
+                        <th>34</th>
+                        <td id="dmx340">000</td>
+                        <td id="dmx341">000</td>
+                        <td id="dmx342">000</td>
+                        <td id="dmx343">000</td>
+                        <td id="dmx344">000</td>
+                        <td id="dmx345">000</td>
+                        <td id="dmx346">000</td>
+                        <td id="dmx347">000</td>
+                        <td id="dmx348">000</td>
+                        <td id="dmx349">000</td>
+                    </tr>
+                    <tr>
+                        <th>35</th>
+                        <td id="dmx350">000</td>
+                        <td id="dmx351">000</td>
+                        <td id="dmx352">000</td>
+                        <td id="dmx353">000</td>
+                        <td id="dmx354">000</td>
+                        <td id="dmx355">000</td>
+                        <td id="dmx356">000</td>
+                        <td id="dmx357">000</td>
+                        <td id="dmx358">000</td>
+                        <td id="dmx359">000</td>
+                    </tr>
+                    <tr>
+                        <th>36</th>
+                        <td id="dmx360">000</td>
+                        <td id="dmx361">000</td>
+                        <td id="dmx362">000</td>
+                        <td id="dmx363">000</td>
+                        <td id="dmx364">000</td>
+                        <td id="dmx365">000</td>
+                        <td id="dmx366">000</td>
+                        <td id="dmx367">000</td>
+                        <td id="dmx368">000</td>
+                        <td id="dmx369">000</td>
+                    </tr>
+                    <tr>
+                        <th>37</th>
+                        <td id="dmx370">000</td>
+                        <td id="dmx371">000</td>
+                        <td id="dmx372">000</td>
+                        <td id="dmx373">000</td>
+                        <td id="dmx374">000</td>
+                        <td id="dmx375">000</td>
+                        <td id="dmx376">000</td>
+                        <td id="dmx377">000</td>
+                        <td id="dmx378">000</td>
+                        <td id="dmx379">000</td>
+                    </tr>
+                    <tr>
+                        <th>38</th>
+                        <td id="dmx380">000</td>
+                        <td id="dmx381">000</td>
+                        <td id="dmx382">000</td>
+                        <td id="dmx383">000</td>
+                        <td id="dmx384">000</td>
+                        <td id="dmx385">000</td>
+                        <td id="dmx386">000</td>
+                        <td id="dmx387">000</td>
+                        <td id="dmx388">000</td>
+                        <td id="dmx389">000</td>
+                    </tr>
+                    <tr>
+                        <th>39</th>
+                        <td id="dmx390">000</td>
+                        <td id="dmx391">000</td>
+                        <td id="dmx392">000</td>
+                        <td id="dmx393">000</td>
+                        <td id="dmx394">000</td>
+                        <td id="dmx395">000</td>
+                        <td id="dmx396">000</td>
+                        <td id="dmx397">000</td>
+                        <td id="dmx398">000</td>
+                        <td id="dmx399">000</td>
+                    </tr>
+                    <tr>
+                        <th>40</th>
+                        <td id="dmx400">000</td>
+                        <td id="dmx401">000</td>
+                        <td id="dmx402">000</td>
+                        <td id="dmx403">000</td>
+                        <td id="dmx404">000</td>
+                        <td id="dmx405">000</td>
+                        <td id="dmx406">000</td>
+                        <td id="dmx407">000</td>
+                        <td id="dmx408">000</td>
+                        <td id="dmx409">000</td>
+                    </tr>
+                    <tr>
+                        <th>41</th>
+                        <td id="dmx410">000</td>
+                        <td id="dmx411">000</td>
+                        <td id="dmx412">000</td>
+                        <td id="dmx413">000</td>
+                        <td id="dmx414">000</td>
+                        <td id="dmx415">000</td>
+                        <td id="dmx416">000</td>
+                        <td id="dmx417">000</td>
+                        <td id="dmx418">000</td>
+                        <td id="dmx419">000</td>
+                    </tr>
+                    <tr>
+                        <th>42</th>
+                        <td id="dmx420">000</td>
+                        <td id="dmx421">000</td>
+                        <td id="dmx422">000</td>
+                        <td id="dmx423">000</td>
+                        <td id="dmx424">000</td>
+                        <td id="dmx425">000</td>
+                        <td id="dmx426">000</td>
+                        <td id="dmx427">000</td>
+                        <td id="dmx428">000</td>
+                        <td id="dmx429">000</td>
+                    </tr>
+                    <tr>
+                        <th>43</th>
+                        <td id="dmx430">000</td>
+                        <td id="dmx431">000</td>
+                        <td id="dmx432">000</td>
+                        <td id="dmx433">000</td>
+                        <td id="dmx434">000</td>
+                        <td id="dmx435">000</td>
+                        <td id="dmx436">000</td>
+                        <td id="dmx437">000</td>
+                        <td id="dmx438">000</td>
+                        <td id="dmx439">000</td>
+                    </tr>
+                    <tr>
+                        <th>44</th>
+                        <td id="dmx440">000</td>
+                        <td id="dmx441">000</td>
+                        <td id="dmx442">000</td>
+                        <td id="dmx443">000</td>
+                        <td id="dmx444">000</td>
+                        <td id="dmx445">000</td>
+                        <td id="dmx446">000</td>
+                        <td id="dmx447">000</td>
+                        <td id="dmx448">000</td>
+                        <td id="dmx449">000</td>
+                    </tr>
+                    <tr>
+                        <th>45</th>
+                        <td id="dmx450">000</td>
+                        <td id="dmx451">000</td>
+                        <td id="dmx452">000</td>
+                        <td id="dmx453">000</td>
+                        <td id="dmx454">000</td>
+                        <td id="dmx455">000</td>
+                        <td id="dmx456">000</td>
+                        <td id="dmx457">000</td>
+                        <td id="dmx458">000</td>
+                        <td id="dmx459">000</td>
+                    </tr>
+                    <tr>
+                        <th>46</th>
+                        <td id="dmx460">000</td>
+                        <td id="dmx461">000</td>
+                        <td id="dmx462">000</td>
+                        <td id="dmx463">000</td>
+                        <td id="dmx464">000</td>
+                        <td id="dmx465">000</td>
+                        <td id="dmx466">000</td>
+                        <td id="dmx467">000</td>
+                        <td id="dmx468">000</td>
+                        <td id="dmx469">000</td>
+                    </tr>
+                    <tr>
+                        <th>47</th>
+                        <td id="dmx470">000</td>
+                        <td id="dmx471">000</td>
+                        <td id="dmx472">000</td>
+                        <td id="dmx473">000</td>
+                        <td id="dmx474">000</td>
+                        <td id="dmx475">000</td>
+                        <td id="dmx476">000</td>
+                        <td id="dmx477">000</td>
+                        <td id="dmx478">000</td>
+                        <td id="dmx479">000</td>
+                    </tr>
+                    <tr>
+                        <th>48</th>
+                        <td id="dmx480">000</td>
+                        <td id="dmx481">000</td>
+                        <td id="dmx482">000</td>
+                        <td id="dmx483">000</td>
+                        <td id="dmx484">000</td>
+                        <td id="dmx485">000</td>
+                        <td id="dmx486">000</td>
+                        <td id="dmx487">000</td>
+                        <td id="dmx488">000</td>
+                        <td id="dmx489">000</td>
+                    </tr>
+                    <tr>
+                        <th>49</th>
+                        <td id="dmx490">000</td>
+                        <td id="dmx491">000</td>
+                        <td id="dmx492">000</td>
+                        <td id="dmx493">000</td>
+                        <td id="dmx494">000</td>
+                        <td id="dmx495">000</td>
+                        <td id="dmx496">000</td>
+                        <td id="dmx497">000</td>
+                        <td id="dmx498">000</td>
+                        <td id="dmx499">000</td>
+                    </tr>
+                    <tr>
+                        <th>50</th>
+                        <td id="dmx500">000</td>
+                        <td id="dmx501">000</td>
+                        <td id="dmx502">000</td>
+                        <td id="dmx503">000</td>
+                        <td id="dmx504">000</td>
+                        <td id="dmx505">000</td>
+                        <td id="dmx506">000</td>
+                        <td id="dmx507">000</td>
+                        <td id="dmx508">000</td>
+                        <td id="dmx509">000</td>
+                    </tr>
+                    <tr>
+                        <th>51</th>
+                        <td id="dmx510">000</td>
+                        <td id="dmx511">000</td>
+                        <td id="dmx512">000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <script>
+        var dmxValues = [];
+        for(var i = 0; i < 513; i++)
+        {
+            dmxValues[i] = 0;
+        }
+        
+        var dmxObjects = [];
+        
+        for(var i = 0; i < 513; i++)
+        {
+            dmxObjects[i] = $("#dmx" + i);
+        }
+        
+        var setDMX = function(channel, value)
+        {
+            dmxValues[channel] = value;  
+            var printedValue = value;
+            if(value < 10)
+            {
+                printedValue = "00" + value;
+            } 
+            else if(value < 100)
+            {
+                printedValue = "0" + value;
+            }
+            dmxObjects[channel].text(printedValue);
+            dmxObjects[channel].css({"background-color": "rgba(0, 255, 0, " + (value / 255) +")" });
+        };
+        
+        
+        var webSocket = new WebSocket("ws://localhost:6787");
+        webSocket.onopen = function(evt) 
+        { 
+            $("#spnConnectionStatus").text("connected");
+        }; 
+        webSocket.onclose = function(evt) 
+        { 
+            $("#spnConnectionStatus").text("disconnected");
+        }; 
+        webSocket.onmessage = function(evt) 
+        {
+            var packet = evt.data;
+            var packetHead = packet.substring(0, 3);
+            var packetData = packet.substring(4, packet.length);
+            switch(packetHead)
+            {
+                case "dmx":
+                    var splitData = packetData.split(",");
+                    for(var i = 0; i < splitData.length; i++)
+                    {
+                        setDMX(i + 1, parseInt(splitData[i]));
+                    }
+                    break;
+                case "upt":
+                    $("#spnLastUpdateTime").text(packetData);
+                    break;
+            }
+        }; 
+        
+        
+    </script>
+    </body>
+</html>

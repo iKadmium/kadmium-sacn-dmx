@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="Copy HTDocs">
+    <output-path>$PROJECT_DIR$/out/artifacts/kadmium_sacn_dmx_jar</output-path>
+    <root id="root">
+      <element id="directory" name="htdocs">
+        <element id="dir-copy" path="$PROJECT_DIR$/htdocs" />
+      </element>
+    </root>
+  </artifact>
+</component>

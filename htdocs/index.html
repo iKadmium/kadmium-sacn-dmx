@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>sACN to DMX</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <script src="jquery/jquery-2.1.4.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+        <div class="container">
+            <h1>sACN to DMX</h1>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Time since last update:</p>
+                </div> 
+                <div class="col-sm-6">
+                    <span id="spnLastUpdateTime">never</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Websocket connection status:</p>
+                </div>
+                <div class="col-sm-6">
+                    <span id="spnConnectionStatus">disconnected</span>
+                </div>
+            </div>
+            
+            <div class="btn-group btn-group-lg">
+                <a href="/" class="btn btn-primary">Home</a>
+                <a href="/config" class="btn btn-primary">Config</a>
+                <a href="/realtime" class="btn btn-primary">Realtime</a>
+            </div>
+        </div>
+    <script>
+        
+        var webSocket = new WebSocket("ws://localhost:6787");
+        webSocket.onopen = function(evt) 
+        { 
+            $("#spnConnectionStatus").text("connected");
+        }; 
+        
+        webSocket.onclose = function(evt) 
+        { 
+            $("#spnConnectionStatus").text("disconnected");
+        }; 
+        
+        webSocket.onmessage = function(evt) 
+        {
+            var packet = evt.data;
+            var packetHead = packet.substring(0, 3);
+            var packetData = packet.substring(4, packet.length);
+            switch(packetHead)
+            {
+                case "upt":
+                    $("#spnLastUpdateTime").text(packetData);
+                    break;
+            }
+        }; 
+        
+        
+    </script>
+    </body>
+</html>
